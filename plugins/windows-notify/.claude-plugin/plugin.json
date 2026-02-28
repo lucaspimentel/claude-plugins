@@ -1,0 +1,19 @@
+{
+  "name": "windows-notify",
+  "description": "Shows Windows toast notifications when Claude Code needs attention",
+  "author": { "name": "Lucas Pimentel" },
+  "repository": "https://github.com/lucaspimentel/lucas-claude-plugins",
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "permission_prompt|idle_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"${CLAUDE_PLUGIN_ROOT}/scripts/notify.ps1\""
+          }
+        ]
+      }
+    ]
+  }
+}

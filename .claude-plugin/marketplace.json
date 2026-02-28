@@ -12,6 +12,12 @@
       "name": "lucas-dev-tools",
       "source": "./plugins/lucas-dev-tools",
       "description": "Developer workflow utilities: git commits, PR reviews, PR comments, docs updates, clipboard helpers",
+      "version": "1.0.1"
+    },
+    {
+      "name": "windows-notify",
+      "source": "./plugins/windows-notify",
+      "description": "Shows Windows toast notifications when Claude Code needs attention",
       "version": "1.0.0"
     }
   ]
