@@ -93,9 +93,9 @@ Process files one at a time — show the diff explanation, then immediately pres
 ### Step 4: Execute Decisions
 
 After all files have been decided, execute the actions:
-- **Apply**: run `chezmoi apply <destination-path>`
+- **Apply**: run `chezmoi apply --force <destination-path>`
 - **Copy local to chezmoi**:
-  - **Regular files**: run `chezmoi add <destination-path>`
+  - **Regular files**: run `chezmoi add --force <destination-path>` — **exception: never use `chezmoi add` on `.sh` files on Windows**, as it strips the `executable_` prefix from the source filename; instead, manually copy the file to the chezmoi source path
   - **Template files**: DO NOT use `chezmoi add` — it would overwrite the source `.tmpl` file with
     a plain copy of the rendered destination, stripping all template directives and breaking the template.
     Instead, use `chezmoi source-path <destination-path>` to find the source file, then manually
@@ -116,3 +116,5 @@ Confirm the full batch with the user before executing any writes.
 - When showing diffs, use the destination path (the human-friendly one) as the primary identifier.
 - For complex merges, `chezmoi merge <path>` opens the user's configured merge tool — mention
   this as an option if the user prefers a visual merge tool over inline editing.
+- **Windows + `.sh` files**: Do NOT use `chezmoi add` on shell scripts on Windows — it removes the `executable_` prefix from the source filename. Instead, copy the file manually to the chezmoi source path (use `chezmoi source-path <destination>` to find it).
+- Always pass `--force` to `chezmoi apply` and `chezmoi add` to avoid interactive prompts.
