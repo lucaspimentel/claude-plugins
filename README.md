@@ -26,7 +26,7 @@ Sends Windows toast notifications when Claude Code needs your attention (e.g. pe
 
 1. Add the marketplace:
    ```sh
-   /plugin marketplace add https://github.com/lucaspimentel/lucas-claude-plugins
+   /plugin marketplace add https://github.com/lucaspimentel/claude-plugins
    ```
 
 2. Install a plugin:

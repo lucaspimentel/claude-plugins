@@ -2,7 +2,7 @@
   "name": "windows-notify",
   "description": "Shows Windows toast notifications when Claude Code needs attention",
   "author": { "name": "Lucas Pimentel" },
-  "repository": "https://github.com/lucaspimentel/lucas-claude-plugins",
+  "repository": "https://github.com/lucaspimentel/claude-plugins",
   "hooks": {
     "Notification": [
       {
