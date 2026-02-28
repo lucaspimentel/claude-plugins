@@ -26,7 +26,7 @@ Skills are auto-discovered from the `skills/` directory — no registration in `
 
 ```sh
 /plugin marketplace add ./path/to/lucas-claude-plugins
-/plugin install lucas-dev-tools@lucas-plugins
+/plugin install lucas-dev-tools@lucasp-claude-plugins
 ```
 
 To test a skill after changes, reinstall the plugin or reload Claude Code.
