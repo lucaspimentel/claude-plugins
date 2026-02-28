@@ -83,6 +83,7 @@ For each changed file, show the diff and explain what's different in plain langu
 - Options (always these 4, in this order):
   1. **Apply from chezmoi** — overwrite local with the chezmoi source version
   2. **Copy local to chezmoi** — update the chezmoi source with your local changes
+     (for template files, this requires manual editing to preserve template directives)
   3. **Skip** — leave this file alone for now
   4. **Edit / merge** — help me manually merge the two versions
 
@@ -93,7 +94,13 @@ Process files one at a time — show the diff explanation, then immediately pres
 
 After all files have been decided, execute the actions:
 - **Apply**: run `chezmoi apply <destination-path>`
-- **Copy local to chezmoi**: run `chezmoi add <destination-path>`
+- **Copy local to chezmoi**:
+  - **Regular files**: run `chezmoi add <destination-path>`
+  - **Template files**: DO NOT use `chezmoi add` — it would overwrite the source `.tmpl` file with
+    a plain copy of the rendered destination, stripping all template directives and breaking the template.
+    Instead, use `chezmoi source-path <destination-path>` to find the source file, then manually
+    edit it to incorporate the local changes while preserving all `{{ }}` template expressions.
+    Show the user a diff of what you plan to write, and ask for confirmation before writing.
 - **Edit / merge**: read both versions, suggest a merged result, write it to the right location
 
 Confirm the full batch with the user before executing any writes.
