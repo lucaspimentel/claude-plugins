@@ -7,6 +7,27 @@ using System.Runtime.InteropServices;
 public class Win32 {
     [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
     [DllImport("user32.dll")] public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct FLASHWINFO {
+        public uint cbSize;
+        public IntPtr hwnd;
+        public uint dwFlags;
+        public uint uCount;
+        public uint dwTimeout;
+    }
+    // dwFlags: FLASHW_ALL = 3, FLASHW_TIMERNOFG = 12
+    [DllImport("user32.dll")] public static extern bool FlashWindowEx(ref FLASHWINFO pwfi);
+
+    public static void Flash(IntPtr hwnd) {
+        var fi = new FLASHWINFO();
+        fi.cbSize = (uint)System.Runtime.InteropServices.Marshal.SizeOf(fi);
+        fi.hwnd = hwnd;
+        fi.dwFlags = 3 | 12; // FLASHW_ALL | FLASHW_TIMERNOFG
+        fi.uCount = 3;
+        fi.dwTimeout = 0;
+        FlashWindowEx(ref fi);
+    }
 }
 "@
 
@@ -32,11 +53,10 @@ $fgProc = Get-Process -Id $fgPid -ErrorAction SilentlyContinue
 if ($fgProc -and $fgProc.ProcessName -eq "WindowsTerminal") {
     $wtAncestorPid = Get-WTAncestorPid
     if ($wtAncestorPid -and $wtAncestorPid -eq [int]$fgPid) {
-        # Same WT window: user is on a different tab/pane — ring the bell
-        [Console]::Write("`a")
+        # Same WT window: user may be on a different tab/pane — flash the taskbar
+        [Win32]::Flash($fgHwnd)
+        exit 0
     }
-    # Either same pane (bell rang above and we're done) or same WT window — no toast
-    exit 0
 }
 
 $robot   = [char]::ConvertFromUtf32(0x1F916)
