@@ -28,8 +28,7 @@ When the source and destination diverge, the user needs to decide which version 
 - **Destination → Source** (`chezmoi add`): Copy local file changes back into chezmoi source
 
 The source directory uses special filename prefixes (`dot_`, `executable_`, `symlink_`, etc.)
-and suffixes (`.tmpl` for templates). See `reference.md` for the full naming reference
-when you need to map between source and destination paths.
+and suffixes (`.tmpl` for templates).
 
 ## Workflow
 
@@ -60,7 +59,7 @@ Example format:
 
 ### Step 3: Walk Through Each File
 
-For each changed file, show the diff and explain what's different in plain language.
+For each changed file, show the diff and explain what's different in plain language. If the user chooses **Edit / merge**, handle it inline right then — read both versions, suggest a merged result, write it to the right location — before moving on to the next file.
 
 **For template files (`.tmpl`):**
 - The raw source will contain template directives like `{{ .chezmoi.hostname }}`.
@@ -92,7 +91,7 @@ Process files one at a time — show the diff explanation, then immediately pres
 
 ### Step 4: Execute Decisions
 
-After all files have been decided, execute the actions:
+After all files have been decided, execute the Apply and Copy actions in batch:
 - **Apply**: run `chezmoi apply --force <destination-path>`
 - **Copy local to chezmoi**:
   - **Regular files**: run `chezmoi add --force <destination-path>` — **exception: never use `chezmoi add` on `.sh` files on Windows**, as it strips the `executable_` prefix from the source filename; instead, manually copy the file to the chezmoi source path
@@ -101,7 +100,6 @@ After all files have been decided, execute the actions:
     Instead, use `chezmoi source-path <destination-path>` to find the source file, then manually
     edit it to incorporate the local changes while preserving all `{{ }}` template expressions.
     Show the user a diff of what you plan to write, and ask for confirmation before writing.
-- **Edit / merge**: read both versions, suggest a merged result, write it to the right location
 
 Confirm the full batch with the user before executing any writes.
 
@@ -116,5 +114,3 @@ Confirm the full batch with the user before executing any writes.
 - When showing diffs, use the destination path (the human-friendly one) as the primary identifier.
 - For complex merges, `chezmoi merge <path>` opens the user's configured merge tool — mention
   this as an option if the user prefers a visual merge tool over inline editing.
-- **Windows + `.sh` files**: Do NOT use `chezmoi add` on shell scripts on Windows — it removes the `executable_` prefix from the source filename. Instead, copy the file manually to the chezmoi source path (use `chezmoi source-path <destination>` to find it).
-- Always pass `--force` to `chezmoi apply` and `chezmoi add` to avoid interactive prompts.
