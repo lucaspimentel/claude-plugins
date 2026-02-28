@@ -1,0 +1,4 @@
+.vscode/
+
+.claude/*.local.*
+CLAUDE.local.md
