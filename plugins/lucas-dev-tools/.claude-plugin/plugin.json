@@ -1,0 +1,8 @@
+{
+  "name": "lucas-dev-tools",
+  "description": "Developer workflow utilities: git commits, PR reviews, PR comments, docs updates, clipboard helpers",
+  "author": {
+    "name": "Lucas Pimentel"
+  },
+  "repository": "https://github.com/lucaspimentel/lucas-claude-plugins"
+}

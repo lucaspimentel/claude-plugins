@@ -1,0 +1,18 @@
+{
+  "name": "lucas-plugins",
+  "owner": {
+    "name": "Lucas Pimentel"
+  },
+  "metadata": {
+    "description": "Personal Claude Code plugins by Lucas Pimentel",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "lucas-dev-tools",
+      "source": "./plugins/lucas-dev-tools",
+      "description": "Developer workflow utilities: git commits, PR reviews, PR comments, docs updates, clipboard helpers",
+      "version": "1.0.0"
+    }
+  ]
+}
