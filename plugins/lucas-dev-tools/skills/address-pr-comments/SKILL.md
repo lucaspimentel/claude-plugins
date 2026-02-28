@@ -65,14 +65,14 @@ For each unresolved thread, in order:
 3. Show the user the filename, line numbers, and a code snippet (±5-10 lines around the commented line) so they have immediate context without needing to ask
 4. Briefly explain what the reviewer is asking or suggesting
 5. Evaluate whether the comment/suggestion is correct — state your assessment clearly (e.g. "The suggestion is correct because..." or "I disagree because...")
-4. Use `AskUserQuestion` to ask what to do. Offer these options (adjust based on context):
+5. Use `AskUserQuestion` to ask what to do. Offer these options (adjust based on context):
    - **"Apply suggestion"** — only if the comment contains a GitHub suggestion block (` ```suggestion `)
    - **"Fix it"** — investigate and implement the requested change
    - **"Skip"** — move to the next comment without changes
-5. If changes are made:
+6. If changes are made:
    - Stage and commit the change (follow git-commit skill conventions: imperative mood, concise subject, ≤ 50 chars)
    - If `git commit` fails with "1Password: agent returned an error", STOP immediately — user is AFK
-6. Track the outcome: `{thread_id, action taken, short summary}`
+7. Track the outcome: `{thread_id, action taken, short summary}`
 
 Continue until all threads are processed.
 
