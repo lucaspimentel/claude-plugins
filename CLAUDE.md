@@ -10,6 +10,10 @@ Each plugin lives under `plugins/<plugin-name>/` and contains:
 - `.claude-plugin/plugin.json` — plugin metadata
 - `skills/<skill-name>/SKILL.md` — one skill per subdirectory; the frontmatter `name` and `description` fields control how Claude triggers the skill
 
+## Plugin Versions
+
+Plugin versions are tracked in `.claude-plugin/marketplace.json` under each plugin's `"version"` field. Bump this when making changes to a plugin.
+
 ## Adding a Skill
 
 1. Create `plugins/<plugin>/skills/<skill-name>/SKILL.md`
