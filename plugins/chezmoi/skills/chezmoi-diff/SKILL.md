@@ -1,0 +1,111 @@
+---
+name: chezmoi-diff
+allowed-tools: Bash(chezmoi status:*), Bash(chezmoi diff:*), Bash(chezmoi cat:*), Bash(chezmoi source-path:*), Bash(chezmoi target-path:*)
+description: >
+  Help resolve differences between chezmoi-managed dotfiles and local files.
+  Use this skill whenever the user mentions chezmoi, dotfiles sync, chezmoi update,
+  chezmoi apply, chezmoi diff, or wants to compare/resolve their chezmoi source
+  files with local destination files. Also trigger when the user wants to understand
+  what changed in their dotfiles, which direction changes should flow (source→local
+  or local→source), or needs help interpreting chezmoi file naming conventions
+  (dot_, executable_, .tmpl, symlink_, etc.).
+---
+
+# Chezmoi Diff Resolution
+
+Help the user understand and resolve differences between their chezmoi source directory
+and local destination files. The goal is to make `chezmoi diff` output actionable by
+walking through changes and deciding what to do with each one.
+
+## Context: How Chezmoi Works
+
+Chezmoi manages dotfiles by keeping a "source of truth" copy in a source directory
+(typically `~/.local/share/chezmoi/`) and applying those files to the home directory.
+When the source and destination diverge, the user needs to decide which version to keep.
+
+**Two directions of sync:**
+- **Source → Destination** (`chezmoi apply`): Overwrite local files with chezmoi source versions
+- **Destination → Source** (`chezmoi add`): Copy local file changes back into chezmoi source
+
+The source directory uses special filename prefixes (`dot_`, `executable_`, `symlink_`, etc.)
+and suffixes (`.tmpl` for templates). See `reference.md` for the full naming reference
+when you need to map between source and destination paths.
+
+## Workflow
+
+### Step 1: Get the Diff
+
+Run `chezmoi status` first for a quick overview of which files changed and the type of change
+(M=modified, A=added, D=deleted). Then run `chezmoi diff` for the full unified diff output.
+
+If both produce no output, tell the user everything is in sync and stop.
+
+### Step 2: Present a Summary
+
+Show a table of all changed files with:
+- The **destination path** (the human-readable path like `~/.gitconfig`)
+- Whether the file is a **template** (`.tmpl` suffix in source) — templates are important
+  because the source will contain Go template syntax while the destination has rendered values
+- A brief characterization of the change: lines added/removed, or "new file", "deleted", etc.
+
+Example format:
+
+```
+| # | File                         | Template | Changes        |
+|---|------------------------------|----------|----------------|
+| 1 | ~/.config/powershell/profile | no       | +3 -1 lines    |
+| 2 | ~/.gitconfig                 | yes      | +5 -2 lines    |
+| 3 | ~/.claude/settings.json      | yes      | +1 -2 lines    |
+```
+
+### Step 3: Walk Through Each File
+
+For each changed file, show the diff and explain what's different in plain language.
+
+**For template files (`.tmpl`):**
+- The raw source will contain template directives like `{{ .chezmoi.hostname }}`.
+  These are not real differences — they render to concrete values on apply.
+- Run `chezmoi cat <destination-path>` to get the rendered version of the source template.
+- Compare the **rendered** source against the **actual** destination file to show the real diff.
+- Clearly note which parts of the source are template expressions that render to values.
+- Pay special attention to **conditional blocks** like `{{ if eq .chezmoi.hostname "myhost" }}`.
+  These mean the rendered output differs per machine. Explain which branch applies to the
+  current machine and what values other machines would get — this helps the user understand
+  whether a diff is machine-specific or a real change they made locally.
+
+**For regular files:**
+- Show the diff as-is. Read both the source and destination files if needed for context.
+
+**For each file, use the `AskUserQuestion` tool to present the decision as a single-select question:**
+
+- Header: the filename (short form, e.g. `settings.json`)
+- Question: `What do you want to do with ~/.claude/settings.json?`
+- Options (always these 4, in this order):
+  1. **Apply from chezmoi** — overwrite local with the chezmoi source version
+  2. **Copy local to chezmoi** — update the chezmoi source with your local changes
+  3. **Skip** — leave this file alone for now
+  4. **Edit / merge** — help me manually merge the two versions
+
+Process files one at a time — show the diff explanation, then immediately present the
+`AskUserQuestion` for that file before moving on to the next.
+
+### Step 4: Execute Decisions
+
+After all files have been decided, execute the actions:
+- **Apply**: run `chezmoi apply <destination-path>`
+- **Copy local to chezmoi**: run `chezmoi add <destination-path>`
+- **Edit / merge**: read both versions, suggest a merged result, write it to the right location
+
+Confirm the full batch with the user before executing any writes.
+
+## Important Details
+
+- Always use `chezmoi source-path` to find the source directory — don't hardcode it.
+- Use `chezmoi cat <path>` to render templates for comparison, not raw file reads of `.tmpl` files.
+- Use `chezmoi target-path <source-path>` or `chezmoi source-path <target-path>` to map between paths.
+- The source directory may have a subdirectory structure (e.g. a `windows/` subfolder as the root)
+  based on the `sourceDir` config. Respect whatever `chezmoi source-path` returns.
+- On Windows, chezmoi may report paths with forward slashes. Normalize as needed.
+- When showing diffs, use the destination path (the human-friendly one) as the primary identifier.
+- For complex merges, `chezmoi merge <path>` opens the user's configured merge tool — mention
+  this as an option if the user prefers a visual merge tool over inline editing.

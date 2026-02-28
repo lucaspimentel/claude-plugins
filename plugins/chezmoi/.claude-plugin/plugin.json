@@ -1,0 +1,8 @@
+{
+  "name": "chezmoi",
+  "description": "Chezmoi dotfile management: diff resolution, file sync between source and destination",
+  "author": {
+    "name": "Lucas Pimentel"
+  },
+  "repository": "https://github.com/lucaspimentel/claude-plugins"
+}
