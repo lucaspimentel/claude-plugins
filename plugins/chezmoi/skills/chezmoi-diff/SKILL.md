@@ -72,6 +72,14 @@ For each changed file, show the diff and explain what's different in plain langu
   current machine and what values other machines would get — this helps the user understand
   whether a diff is machine-specific or a real change they made locally.
 
+**Reading the diff correctly:**
+`chezmoi diff` outputs a unified diff where `---` is the local **destination** (current file on disk) and `+++` is what chezmoi **would write** (from the source).
+- Lines starting with `-` exist locally but **not** in the chezmoi source
+- Lines starting with `+` exist in the chezmoi source but **not** locally
+
+So if X appears on a `-` line, your local file has X and the chezmoi source doesn't.
+Always phrase the explanation from the local file's perspective: "your local file has X / is missing Y".
+
 **For regular files:**
 - Show the diff as-is. Read both the source and destination files if needed for context.
 
