@@ -18,6 +18,14 @@ Developer workflow utilities for day-to-day use inside Claude Code.
 | `update-pr-description` | Regenerate the PR description from recent commits |
 | `review-pr` | Run a comprehensive code review on the current PR |
 
+### chezmoi
+
+Chezmoi dotfile management: diff resolution, file sync between source and destination.
+
+| Skill | Description |
+|---|---|
+| `chezmoi-diff` | Resolve differences between chezmoi-managed dotfiles and local files |
+
 ### windows-notify
 
 Sends Windows toast notifications when Claude Code needs your attention (e.g. permission prompts, idle prompts). No skills — works automatically once installed.
@@ -32,6 +40,7 @@ Sends Windows toast notifications when Claude Code needs your attention (e.g. pe
 2. Install a plugin:
    ```sh
    /plugin install lucas-dev-tools@lucasp-claude-plugins
+   /plugin install chezmoi@lucasp-claude-plugins
    /plugin install windows-notify@lucasp-claude-plugins
    ```
 
