@@ -3,15 +3,19 @@ name: update-docs
 description: "Update project documentation based on recent changes and current codebase state. Use when the user says 'update docs', 'update readme', 'sync docs', 'docs are stale', 'update CLAUDE.md', 'refresh documentation', or any variation of wanting documentation updated."
 ---
 
-Update project documentation based on recent changes and current codebase state.
+Verify and update project documentation so it accurately reflects the current state of the codebase.
 Do not commit or push the changes to git unless also asked to do so.
 Do not include volatile metrics (test counts, coverage percentages, line counts) that become stale quickly.
 
-## Detecting Recent Changes
+## Approach
 
-Identify what changed by comparing against the default branch:
-- `git diff main...HEAD --name-only` (or the repo's default branch if not `main`)
-- `git log main..HEAD --oneline`
+The goal is documentation that is correct *right now*, not just patched for recent commits. Treat every claim in the docs as potentially stale and verify it against the actual code, file structure, and configuration.
+
+1. **Read the existing docs** — identify all claims: file paths, command examples, architecture descriptions, setup steps, conventions, dependency lists.
+2. **Verify each claim against the codebase** — spot-check referenced paths, commands, and patterns. Flag anything outdated, missing, or wrong.
+3. **Fix inaccuracies** — correct or remove statements that no longer hold. Add documentation for important things that are undocumented.
+
+Use `git diff` and `git log` as *supplementary* signals to find areas likely to have drifted, but do not rely on them as the sole source of what needs updating.
 
 ## AI-Optimized Documentation
 
@@ -29,9 +33,4 @@ Update files intended for human developers:
 - TODO.md if present — task tracking and priorities
 - README.md files in subdirectories — component-specific docs
 - Focus on clarity, completeness, and current accuracy
-- Remove outdated information
-
-## Accuracy Check
-
-- Verify that existing documentation is still accurate, not just add content for new changes
-- Remove or correct statements that are no longer true
+- Remove outdated information that no longer matches the codebase
