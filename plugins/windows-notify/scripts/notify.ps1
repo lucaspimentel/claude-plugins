@@ -67,7 +67,7 @@ $message = if ($data.message) { $data.message } else { "Needs your attention" }
 [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null
 
 $xml = @"
-<toast activationType="protocol" launch="wt:">
+<toast activationType="protocol" launch="windows-notify.lucasp-claude-plugins:">
   <visual>
     <binding template="ToastGeneric">
       <text>$([System.Security.SecurityElement]::Escape($title))</text>
@@ -81,6 +81,6 @@ $doc = [Windows.Data.Xml.Dom.XmlDocument]::new()
 $doc.LoadXml($xml)
 
 $toast = [Windows.UI.Notifications.ToastNotification]::new($doc)
-[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe").Show($toast)
+[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Microsoft.WindowsTerminal_8wekyb3d8bbwe!App").Show($toast)
 
 exit 0

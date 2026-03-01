@@ -4,6 +4,26 @@
   "author": { "name": "Lucas Pimentel" },
   "repository": "https://github.com/lucaspimentel/claude-plugins",
   "hooks": {
+    "PostInstall": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"${CLAUDE_PLUGIN_ROOT}/scripts/setup.ps1\""
+          }
+        ]
+      }
+    ],
+    "PreUninstall": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"${CLAUDE_PLUGIN_ROOT}/scripts/uninstall.ps1\""
+          }
+        ]
+      }
+    ],
     "Notification": [
       {
         "matcher": "permission_prompt|idle_prompt",
