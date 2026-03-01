@@ -12,7 +12,7 @@
       "name": "lucas-dev-tools",
       "source": "./plugins/lucas-dev-tools",
       "description": "Developer workflow utilities: git commits, PR reviews, PR comments, docs updates, clipboard helpers",
-      "version": "1.0.3"
+      "version": "1.1.0"
     },
     {
       "name": "windows-notify",

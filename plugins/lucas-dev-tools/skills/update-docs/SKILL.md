@@ -7,28 +7,54 @@ Verify and update project documentation so it accurately reflects the current st
 Do not commit or push the changes to git unless also asked to do so.
 Do not include volatile metrics (test counts, coverage percentages, line counts) that become stale quickly.
 
-## Approach
+## Phase 1 — Audit (Explore subagent)
 
-The goal is documentation that is correct *right now*, not just patched for recent commits. Treat every claim in the docs as potentially stale and verify it against the actual code, file structure, and configuration.
+Spawn an Explore subagent (subagent_type: "Explore", thoroughness: "very thorough") to perform a read-only audit of all documentation. The subagent cannot edit files, so its job is purely to investigate and report back.
 
-1. **Read the existing docs** — identify all claims: file paths, command examples, architecture descriptions, setup steps, conventions, dependency lists.
-2. **Verify each claim against the codebase** — spot-check referenced paths, commands, and patterns. Flag anything outdated, missing, or wrong.
-3. **Fix inaccuracies** — correct or remove statements that no longer hold. Add documentation for important things that are undocumented.
+Give the subagent these instructions (adapt paths to the current project):
 
-Use `git diff` and `git log` as *supplementary* signals to find areas likely to have drifted, but do not rely on them as the sole source of what needs updating.
+> Audit every documentation file in this project. The goal is to find everything that is wrong, missing, or outdated so someone else can fix it.
+>
+> **Step 1 — Find all doc files.** Glob for `**/*.md` and also check for common doc locations: `./CLAUDE.md`, `./.claude/CLAUDE.md`, `./AGENTS.md`, `./README.md`, `./TODO.md`, and any `README.md` files in subdirectories.
+>
+> **Step 2 — Read each doc file.** For every doc file found, read it and extract every verifiable claim: file paths, directory structures, command examples, architecture descriptions, setup steps, dependency lists, feature lists, convention descriptions.
+>
+> **Step 3 — Verify claims against the codebase.** For each claim, use Glob, Grep, Read, and Bash to check whether it is still accurate. Examples:
+> - A documented file path → does the file exist?
+> - A listed set of features/skills/modules → does it match what actually exists?
+> - A command example → do the referenced scripts/tools exist?
+> - An architecture description → does the actual directory structure match?
+>
+> Also use `git log --oneline -20` and `git diff` as supplementary signals to find areas that may have drifted recently.
+>
+> **Step 4 — Check for undocumented items.** Look for important things that exist in the codebase but are not mentioned in any doc file (e.g., a plugin that has no README entry, a config file with no explanation).
+>
+> **Step 5 — Return a structured report** with these sections:
+>
+> ### Inaccuracies
+> Items where the docs say one thing but the codebase says another. For each: which file, which claim, what's wrong, what the correct state is.
+>
+> ### Missing Documentation
+> Important things in the codebase that have no documentation. For each: what it is, where it lives, what should be documented.
+>
+> ### Stale References
+> Paths, commands, or names that no longer exist. For each: which file, which line, what to remove or replace.
+>
+> ### Confirmed Correct
+> A brief summary of claims that were verified and are still accurate (so the editor knows what not to touch).
 
-## AI-Optimized Documentation
+## Phase 2 — Apply fixes (main agent)
 
-Update files that provide context and instructions for AI agents:
+Once the subagent returns its report, work through the findings and apply edits:
+
+### AI-Optimized Documentation
 - Check if CLAUDE.md exists (look in: `./CLAUDE.md`, `./.claude/CLAUDE.md`, `./CLAUDE.MD`)
 - If CLAUDE.md only references AGENTS.md, leave CLAUDE.md alone and update AGENTS.md instead
 - Otherwise, update CLAUDE.md with relevant context, commands, and conventions
 - Keep instructions clear, imperative, and optimized for AI consumption
 - Include file paths, command examples, and error handling patterns
 
-## Human-Readable Documentation
-
-Update files intended for human developers:
+### Human-Readable Documentation
 - README.md in project root — overview, setup, usage
 - TODO.md if present — task tracking and priorities
 - README.md files in subdirectories — component-specific docs
