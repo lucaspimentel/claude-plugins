@@ -31,32 +31,31 @@ public class Win32 {
 }
 "@
 
-# Get the WindowsTerminal process that is the ancestor of this script
-function Get-WTAncestorPid {
+# Walk the process tree to find the nearest ancestor with a visible main window
+function Get-AncestorHwnd {
     $pid_ = $PID
     while ($pid_ -gt 0) {
         $proc = Get-Process -Id $pid_ -ErrorAction SilentlyContinue
         if (-not $proc) { break }
-        if ($proc.ProcessName -eq "WindowsTerminal") { return $proc.Id }
+        if ($proc.MainWindowHandle -ne [IntPtr]::Zero) { return $proc.MainWindowHandle }
         $parentId = (Get-CimInstance Win32_Process -Filter "ProcessId=$pid_" -ErrorAction SilentlyContinue).ParentProcessId
         if (-not $parentId -or $parentId -eq $pid_) { break }
         $pid_ = $parentId
     }
-    return $null
+    return [IntPtr]::Zero
 }
 
 $fgHwnd = [Win32]::GetForegroundWindow()
-[uint32]$fgPid = 0
-[Win32]::GetWindowThreadProcessId($fgHwnd, [ref]$fgPid) | Out-Null
-$fgProc = Get-Process -Id $fgPid -ErrorAction SilentlyContinue
+$ancestorHwnd = Get-AncestorHwnd
 
-if ($fgProc -and $fgProc.ProcessName -eq "WindowsTerminal") {
-    $wtAncestorPid = Get-WTAncestorPid
-    if ($wtAncestorPid -and $wtAncestorPid -eq [int]$fgPid) {
-        # Same WT window: user may be on a different tab/pane — flash the taskbar
-        [Win32]::Flash($fgHwnd)
-        exit 0
-    }
+if ($ancestorHwnd -ne [IntPtr]::Zero -and $ancestorHwnd -eq $fgHwnd) {
+    # Terminal is already in the foreground — flash the taskbar instead
+    [Win32]::Flash($fgHwnd)
+    exit 0
+}
+
+if ($ancestorHwnd -ne [IntPtr]::Zero) {
+    [long]$ancestorHwnd | Set-Content -Path "$env:TEMP\windows-notify-hwnd.txt"
 }
 
 $robot   = [char]::ConvertFromUtf32(0x1F916)
@@ -81,6 +80,6 @@ $doc = [Windows.Data.Xml.Dom.XmlDocument]::new()
 $doc.LoadXml($xml)
 
 $toast = [Windows.UI.Notifications.ToastNotification]::new($doc)
-[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Microsoft.WindowsTerminal_8wekyb3d8bbwe!App").Show($toast)
+[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe").Show($toast)
 
 exit 0
