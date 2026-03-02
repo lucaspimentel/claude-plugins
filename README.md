@@ -30,6 +30,14 @@ Chezmoi dotfile management: diff resolution, file sync between source and destin
 
 Sends Windows toast notifications when Claude Code needs your attention (e.g. permission prompts, idle prompts). No skills — works automatically once installed.
 
+### windows-terminal
+
+Windows Terminal pane and tab management via `wt.exe`.
+
+| Skill | Description |
+|---|---|
+| `wt-panes` | Open, split, or arrange Windows Terminal panes and tabs |
+
 ## Installation
 
 1. Add the marketplace:
@@ -42,6 +50,7 @@ Sends Windows toast notifications when Claude Code needs your attention (e.g. pe
    /plugin install lucas-dev-tools@lucasp-claude-plugins
    /plugin install chezmoi@lucasp-claude-plugins
    /plugin install windows-notify@lucasp-claude-plugins
+   /plugin install windows-terminal@lucasp-claude-plugins
    ```
 
 For local development, use a local path instead:
