@@ -25,6 +25,12 @@
       "source": "./plugins/chezmoi",
       "description": "Chezmoi dotfile management: diff resolution, file sync between source and destination",
       "version": "1.0.3"
+    },
+    {
+      "name": "windows-terminal",
+      "source": "./plugins/windows-terminal",
+      "description": "Windows Terminal pane and tab management via wt.exe",
+      "version": "1.0.2"
     }
   ]
 }
