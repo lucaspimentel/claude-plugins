@@ -30,7 +30,7 @@
       "name": "windows-terminal",
       "source": "./plugins/windows-terminal",
       "description": "Windows Terminal pane and tab management via wt.exe",
-      "version": "1.0.2"
+      "version": "1.0.3"
     }
   ]
 }
