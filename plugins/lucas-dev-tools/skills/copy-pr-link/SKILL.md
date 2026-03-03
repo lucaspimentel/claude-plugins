@@ -1,6 +1,7 @@
 ---
 name: copy-pr-link
 description: "Copies a GitHub PR link as markdown to the clipboard. Use when the user says 'copy pr link', 'pr markdown', 'copy pr url', 'link to pr', 'pr link', or any variation of wanting a GitHub PR link formatted as markdown. Accepts an optional PR number argument; defaults to the current branch's PR."
+model: haiku
 allowed-tools: Bash(gh *), Bash(echo * | clip)
 ---
 
