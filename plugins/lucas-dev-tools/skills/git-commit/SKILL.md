@@ -17,6 +17,10 @@ Interpret the user's argument (if any) naturally:
   2. If yes → commit only what is staged
   3. If nothing is staged → stage all changes (`git add -A`) and commit
 
+## Windows path handling
+- If you are already in the correct directory, run `git` commands directly — don't prepend `cd <path> &&`.
+- In git bash on Windows, these path forms are equivalent: `D:\foo`, `D:/foo`, `/d/foo`. Use whichever is simplest in context.
+
 ## Instructions
 - Keep commit message concise and in a single line (subject line ≤ 50 chars recommended)
 - Write in imperative mood (e.g., "Add feature" not "Added feature")
