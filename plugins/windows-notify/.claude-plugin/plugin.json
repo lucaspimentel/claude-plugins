@@ -4,23 +4,13 @@
   "author": { "name": "Lucas Pimentel" },
   "repository": "https://github.com/lucaspimentel/claude-plugins",
   "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"${CLAUDE_PLUGIN_ROOT}/scripts/notify.ps1\" -Register"
-          }
-        ]
-      }
-    ],
     "Notification": [
       {
         "matcher": "permission_prompt|idle_prompt",
         "hooks": [
           {
             "type": "command",
-            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"${CLAUDE_PLUGIN_ROOT}/scripts/notify.ps1\""
+            "command": "${CLAUDE_PLUGIN_ROOT}/bin/WindowsNotify.exe"
           }
         ]
       }
