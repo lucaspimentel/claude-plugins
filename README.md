@@ -36,7 +36,8 @@ Windows Terminal pane and tab management via `wt.exe`.
 
 | Skill | Description |
 |---|---|
-| `wt-panes` | Open, split, or arrange Windows Terminal panes and tabs |
+| `wt-panes` | Split or arrange panes within a tab |
+| `wt-tabs` | Manage tabs: open, focus, move panes, set colors and titles |
 
 ## Installation
 

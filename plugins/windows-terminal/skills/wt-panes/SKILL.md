@@ -1,6 +1,6 @@
 ---
 name: wt-panes
-description: "Open, split, or arrange Windows Terminal panes and tabs using wt.exe. Use when the user says 'open panes', 'split terminal', 'new tab', 'side by side', 'terminal layout', 'split pane with WSL', or any variation of wanting to launch Windows Terminal panes or tabs."
+description: "Split or arrange Windows Terminal panes using wt.exe. Use when the user says 'open panes', 'split terminal', 'side by side', 'split pane', 'terminal layout', 'split pane with WSL', or any variation of wanting to split or arrange panes within a tab. For tab management (new tabs, switch tabs, tab colors), see wt-tabs."
 model: haiku
 allowed-tools:
   - Bash(wt *)
