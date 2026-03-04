@@ -1,3 +1,5 @@
+param([switch]$Force)
+
 $input_json = [System.IO.StreamReader]::new([Console]::OpenStandardInput(), [System.Text.Encoding]::UTF8).ReadToEnd()
 $data = $input_json | ConvertFrom-Json
 
@@ -48,14 +50,16 @@ function Get-AncestorHwnd {
 $fgHwnd = [Win32]::GetForegroundWindow()
 $ancestorHwnd = Get-AncestorHwnd
 
-if ($ancestorHwnd -ne [IntPtr]::Zero -and $ancestorHwnd -eq $fgHwnd) {
-    # Terminal is already in the foreground — flash the taskbar instead
-    [Win32]::Flash($fgHwnd)
+$isForeground = $ancestorHwnd -ne [IntPtr]::Zero -and $ancestorHwnd -eq $fgHwnd
+
+if (-not $Force -and $isForeground) {
+    # Terminal is already in the foreground — nothing to do
     exit 0
 }
 
-if ($ancestorHwnd -ne [IntPtr]::Zero) {
-    [long]$ancestorHwnd | Set-Content -Path "$env:TEMP\windows-notify-hwnd.txt"
+# Flash the taskbar if the terminal is in the background
+if ($ancestorHwnd -ne [IntPtr]::Zero -and -not $isForeground) {
+    [Win32]::Flash($ancestorHwnd)
 }
 
 $robot   = [char]::ConvertFromUtf32(0x1F916)
@@ -66,7 +70,7 @@ $message = if ($data.message) { $data.message } else { "Needs your attention" }
 [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null
 
 $xml = @"
-<toast activationType="protocol" launch="windows-notify.lucasp-claude-plugins:">
+<toast>
   <visual>
     <binding template="ToastGeneric">
       <text>$([System.Security.SecurityElement]::Escape($title))</text>
@@ -80,6 +84,6 @@ $doc = [Windows.Data.Xml.Dom.XmlDocument]::new()
 $doc.LoadXml($xml)
 
 $toast = [Windows.UI.Notifications.ToastNotification]::new($doc)
-[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe").Show($toast)
+[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Microsoft.WindowsTerminal_8wekyb3d8bbwe!App").Show($toast)
 
 exit 0
