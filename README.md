@@ -32,3 +32,11 @@ For local development, use a local path instead:
 ```sh
 /plugin marketplace add ./path/to/lucas-claude-plugins
 ```
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Development
+
+This project was developed with help from [Claude Code](https://claude.ai/code) 🤖
