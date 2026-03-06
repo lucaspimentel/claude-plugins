@@ -102,7 +102,8 @@ Process files one at a time — show the diff explanation, then immediately pres
 After all files have been decided, execute the Apply and Copy actions in batch:
 - **Apply**: run `chezmoi apply --force <destination-path>`
 - **Copy local to chezmoi**:
-  - **Regular files**: run `chezmoi add --force <destination-path>` — **exception: never use `chezmoi add` on `.sh` files on Windows**, as it strips the `executable_` prefix from the source filename; instead, manually copy the file to the chezmoi source path
+  - **Regular files**: run `chezmoi add --force <destination-path>` — for executable files (`.sh`, `.ps1`, etc.)
+    that need the `executable_` prefix in the source, run `chezmoi chattr +x <destination-path>` after adding
   - **Template files**: DO NOT use `chezmoi add` — it would overwrite the source `.tmpl` file with
     a plain copy of the rendered destination, stripping all template directives and breaking the template.
     Instead, use `chezmoi source-path <destination-path>` to find the source file, then manually
@@ -122,3 +123,8 @@ Confirm the full batch with the user before executing any writes.
 - When showing diffs, use the destination path (the human-friendly one) as the primary identifier.
 - For complex merges, `chezmoi merge <path>` opens the user's configured merge tool — mention
   this as an option if the user prefers a visual merge tool over inline editing.
+
+## Reference Documentation
+
+- [Command Overview](https://www.chezmoi.io/user-guide/command-overview/)
+- [Reference](https://www.chezmoi.io/reference/)
