@@ -31,6 +31,12 @@
       "source": "./plugins/windows-terminal",
       "description": "Windows Terminal pane and tab management via wt.exe",
       "version": "1.1.0"
+    },
+    {
+      "name": "linters",
+      "source": "./plugins/linters",
+      "description": "Runs linters on edited files: cslint (.cs), PSScriptAnalyzer (.ps1), shellcheck (.sh)",
+      "version": "1.0.0"
     }
   ]
 }

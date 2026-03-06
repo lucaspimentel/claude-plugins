@@ -1,0 +1,27 @@
+{
+  "name": "linters",
+  "description": "Runs linters on edited files: cslint (.cs), PSScriptAnalyzer (.ps1), shellcheck (.sh)",
+  "author": { "name": "Lucas Pimentel" },
+  "repository": "https://github.com/lucaspimentel/claude-plugins",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [{ "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/scripts/check-linters.sh" }]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [{ "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/scripts/cs-lint.sh" }]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [{ "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/scripts/ps-lint.sh" }]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [{ "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/scripts/sh-lint.sh" }]
+      }
+    ]
+  }
+}

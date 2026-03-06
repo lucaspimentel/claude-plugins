@@ -30,6 +30,16 @@ Chezmoi dotfile management: diff resolution, file sync between source and destin
 
 Sends Windows toast notifications when Claude Code needs your attention (e.g. permission prompts, idle prompts). No skills — works automatically once installed.
 
+### linters
+
+Runs linters on edited files automatically via PostToolUse hooks. Warns about missing linters on session start. No skills — works automatically once installed.
+
+| Linter | File type |
+|---|---|
+| `cslint` | `.cs` |
+| PSScriptAnalyzer | `.ps1` |
+| `shellcheck` | `.sh` |
+
 ### windows-terminal
 
 Windows Terminal pane and tab management via `wt.exe`.
@@ -51,6 +61,7 @@ Windows Terminal pane and tab management via `wt.exe`.
    /plugin install lucas-dev-tools@lucasp-claude-plugins
    /plugin install chezmoi@lucasp-claude-plugins
    /plugin install windows-notify@lucasp-claude-plugins
+   /plugin install linters@lucasp-claude-plugins
    /plugin install windows-terminal@lucasp-claude-plugins
    ```
 
