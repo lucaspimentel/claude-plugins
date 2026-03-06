@@ -9,7 +9,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "if [ \"$OS\" = \"Windows_NT\" ]; then powershell -NoProfile -ExecutionPolicy Bypass -File \"${CLAUDE_PLUGIN_ROOT}/scripts/register.ps1\"; else echo '{\"systemMessage\":\"[windows-notify] This plugin only works on Windows. Notifications will not be shown.\"}'; fi"
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/register-hook.sh"
           }
         ]
       }
@@ -20,7 +20,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "[ \"$OS\" = \"Windows_NT\" ] && powershell -NoProfile -ExecutionPolicy Bypass -File \"${CLAUDE_PLUGIN_ROOT}/scripts/notify.ps1\""
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/notify-hook.sh"
           }
         ]
       }
