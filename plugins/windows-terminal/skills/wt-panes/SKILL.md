@@ -3,19 +3,24 @@ name: wt-panes
 description: "Split or arrange Windows Terminal panes using wt.exe. Use when the user says 'open panes', 'split terminal', 'side by side', 'split pane', 'terminal layout', 'split pane with WSL', or any variation of wanting to split or arrange panes within a tab. For tab management (new tabs, switch tabs, tab colors), see wt-tabs."
 model: haiku
 allowed-tools:
-  - Bash(wt *)
+  - Bash(wt.exe *)
 ---
+
+## Platform
+
+This skill requires Windows Terminal (`wt.exe`), available on native Windows and WSL.
+If `wt.exe` is not found in `PATH`, tell the user this skill requires Windows or WSL and **stop** — do not attempt to run any commands.
 
 Generate and immediately execute a `wt.exe` command to open the requested panes or tabs.
 
 ## Rules
 
-1. **Always use `-w 0`** to target the current window (without it, `wt` opens a new window).
+1. **Always use `-w 0`** to target the current window (without it, `wt.exe` opens a new window).
 2. **Always use `-d .`** on every subcommand so new panes/tabs open in the current directory.
 3. **Execute immediately** — do not preview or ask for confirmation.
 4. Chain multiple subcommands with `\;` (backslash-semicolon) in bash.
 
-## `wt` subcommand reference
+## `wt.exe` subcommand reference
 
 | Subcommand | Alias | Purpose |
 |------------|-------|---------|
@@ -37,32 +42,32 @@ Generate and immediately execute a `wt.exe` command to open the requested panes 
 
 **Two panes side by side (vertical split):**
 ```bash
-wt -w 0 split-pane -V -d .
+wt.exe -w 0 split-pane -V -d .
 ```
 
 **Two panes stacked (horizontal split):**
 ```bash
-wt -w 0 split-pane -H -d .
+wt.exe -w 0 split-pane -H -d .
 ```
 
 **Three-pane layout (left + top-right + bottom-right):**
 ```bash
-wt -w 0 split-pane -V -s 0.5 -d . \; split-pane -H -s 0.5 -d .
+wt.exe -w 0 split-pane -V -s 0.5 -d . \; split-pane -H -s 0.5 -d .
 ```
 
 **New tab with a specific profile:**
 ```bash
-wt -w 0 new-tab -p "Ubuntu" -d .
+wt.exe -w 0 new-tab -p "Ubuntu" -d .
 ```
 
 **Split pane with WSL:**
 ```bash
-wt -w 0 split-pane -V -p "Ubuntu" -d .
+wt.exe -w 0 split-pane -V -p "Ubuntu" -d .
 ```
 
 **New tab + split pane:**
 ```bash
-wt -w 0 new-tab -d . \; split-pane -V -d .
+wt.exe -w 0 new-tab -d . \; split-pane -V -d .
 ```
 
 ## Reference
@@ -71,4 +76,4 @@ wt -w 0 new-tab -d . \; split-pane -V -d .
 
 ## Execution
 
-Run the generated command directly with the `Bash` tool using `wt ...`.
+Run the generated command directly with the `Bash` tool using `wt.exe ...`.
