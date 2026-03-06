@@ -23,15 +23,17 @@ fi
 
 # Rule: redundant-cd (BLOCK)
 # shellcheck disable=SC2016
-if [ "$DISABLE_REDUNDANT_CD_RULE" != "1" ] && echo "$command" | grep -qE '(cd\s+[^;|& ]+\s*&&\s)|(git\s+-C\s+[^;|& ]+)'; then
+if [ "$DISABLE_REDUNDANT_CD_RULE" != "1" ] && echo "$command" | grep -qE '(cd\s+"?[^;|& ]+\s*&&\s)|(git\s+-C\s+"?[^;|& ]+)'; then
   cwd=$(echo "$input" | jq -r '.cwd // "unknown"')
   # Extract the target path using bash builtins (avoids MSYS path conversion)
   target=""
-  if [[ "$command" =~ cd[[:space:]]+([^';''|''&'' ']+) ]]; then
-    target="${BASH_REMATCH[1]}"
-  elif [[ "$command" =~ git[[:space:]]+-C[[:space:]]+([^';''|''&'' ']+) ]]; then
-    target="${BASH_REMATCH[1]}"
+  if [[ "$command" =~ cd[[:space:]]+('"'?)([^';''|''&'' ']+) ]]; then
+    target="${BASH_REMATCH[2]}"
+  elif [[ "$command" =~ git[[:space:]]+-C[[:space:]]+('"'?)([^';''|''&'' ']+) ]]; then
+    target="${BASH_REMATCH[2]}"
   fi
+  # Strip trailing quote if present
+  target="${target%'"'}"
   # Normalize both paths with cygpath -w for comparison (consistent Windows format)
   norm_cwd=$(cygpath -w "$cwd" 2>/dev/null || echo "$cwd")
   norm_target=$(cygpath -w "$target" 2>/dev/null || echo "$target")
