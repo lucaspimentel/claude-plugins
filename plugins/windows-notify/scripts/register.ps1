@@ -1,3 +1,4 @@
+#!/usr/bin/env pwsh -NoProfile -File
 $aumid = "ClaudeCode.Notifications"
 $lnkPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Claude Code Notification Plugin.lnk"
 

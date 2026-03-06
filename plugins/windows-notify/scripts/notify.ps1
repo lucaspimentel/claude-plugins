@@ -1,3 +1,4 @@
+#!/usr/bin/env pwsh -NoProfile -File
 param([switch]$Force)
 
 $data = $null

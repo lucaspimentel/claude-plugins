@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 missing=()
 command -v cslint &>/dev/null    || missing+=("cslint (for .cs files)")
 command -v shellcheck &>/dev/null || missing+=("shellcheck (for .sh files)")

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 FILE_PATH=$(jq -r ".tool_input.file_path")
 if [[ "$FILE_PATH" == *.cs ]]; then
   if ! command -v cslint &> /dev/null; then

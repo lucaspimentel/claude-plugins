@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 FILE_PATH=$(jq -r ".tool_input.file_path")
 if [[ "$FILE_PATH" == *.sh ]]; then
   if ! command -v shellcheck &> /dev/null; then

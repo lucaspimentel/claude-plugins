@@ -1,3 +1,4 @@
+#!/usr/bin/env pwsh -NoProfile -File
 param([string]$FilePath)
 
 if (-not $FilePath -or $FilePath -notlike '*.ps1') { exit 0 }
