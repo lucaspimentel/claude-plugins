@@ -4,5 +4,18 @@
   "author": {
     "name": "Lucas Pimentel"
   },
-  "repository": "https://github.com/lucaspimentel/claude-plugins"
+  "repository": "https://github.com/lucaspimentel/claude-plugins",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/pretool-bash-rules.sh"
+          }
+        ]
+      }
+    ]
+  }
 }
