@@ -36,7 +36,7 @@
       "name": "linters",
       "source": "./plugins/linters",
       "description": "Runs linters on edited files: cslint (.cs), PSScriptAnalyzer (.ps1), shellcheck (.sh)",
-      "version": "1.0.1"
+      "version": "1.0.2"
     }
   ]
 }
