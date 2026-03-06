@@ -4,50 +4,13 @@ Personal [Claude Code](https://claude.ai/code) plugin marketplace by Lucas Pimen
 
 ## Plugins
 
-### lucas-dev-tools
-
-Developer workflow utilities for day-to-day use inside Claude Code.
-
-| Skill | Description |
+| Plugin | Description |
 |---|---|
-| `git-commit` | Stage and commit changes with an auto-generated message |
-| `address-pr-comments` | Walk through PR review comments one at a time and address them |
-| `copy-pr-link` | Copy the current PR URL as a markdown link to the clipboard |
-| `copy-pwd` | Copy the current working directory path to the clipboard |
-| `update-docs` | Update project documentation based on recent changes |
-| `update-pr-description` | Regenerate the PR description from recent commits |
-| `review-pr` | Run a comprehensive code review on the current PR |
-
-### chezmoi
-
-Chezmoi dotfile management: diff resolution, file sync between source and destination.
-
-| Skill | Description |
-|---|---|
-| `chezmoi-diff` | Resolve differences between chezmoi-managed dotfiles and local files |
-
-### windows-notify
-
-Sends Windows toast notifications when Claude Code needs your attention (e.g. permission prompts, idle prompts). No skills — works automatically once installed.
-
-### linters
-
-Runs linters on edited files automatically via PostToolUse hooks. Warns about missing linters on session start. No skills — works automatically once installed.
-
-| Linter | File type |
-|---|---|
-| `cslint` | `.cs` |
-| PSScriptAnalyzer | `.ps1` |
-| `shellcheck` | `.sh` |
-
-### windows-terminal
-
-Windows Terminal pane and tab management via `wt.exe`.
-
-| Skill | Description |
-|---|---|
-| `wt-panes` | Split or arrange panes within a tab |
-| `wt-tabs` | Manage tabs: open, focus, move panes, set colors and titles |
+| [lucas-dev-tools](plugins/lucas-dev-tools/README.md) | Developer workflow utilities for day-to-day use |
+| [chezmoi](plugins/chezmoi/README.md) | Chezmoi dotfile management and diff resolution |
+| [windows-notify](plugins/windows-notify/README.md) | Windows toast notifications *(Windows / WSL only)* |
+| [linters](plugins/linters/README.md) | Auto-lint edited files via PostToolUse hooks |
+| [windows-terminal](plugins/windows-terminal/README.md) | Windows Terminal pane and tab management *(Windows / WSL only)* |
 
 ## Installation
 

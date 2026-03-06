@@ -17,7 +17,7 @@
     {
       "name": "windows-notify",
       "source": "./plugins/windows-notify",
-      "description": "Shows Windows toast notifications when Claude Code needs attention",
+      "description": "Windows/WSL only. Shows Windows toast notifications when Claude Code needs attention",
       "version": "1.2.5"
     },
     {
@@ -29,7 +29,7 @@
     {
       "name": "windows-terminal",
       "source": "./plugins/windows-terminal",
-      "description": "Windows Terminal pane and tab management via wt.exe",
+      "description": "Windows/WSL only. Windows Terminal pane and tab management via wt.exe",
       "version": "1.1.1"
     },
     {
