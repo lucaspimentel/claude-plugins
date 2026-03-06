@@ -1,4 +1,4 @@
-# windows-terminal
+# windows-terminal v1.1.1
 
 *(Windows / WSL only)*
 

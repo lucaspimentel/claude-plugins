@@ -1,4 +1,4 @@
-# windows-notify
+# windows-notify v1.2.5
 
 *(Windows / WSL only)*
 

@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This repo is a Claude Code plugin marketplace. The root `.claude-plugin/marketplace.json` declares the marketplace and points to `./plugins/` as the plugin root.
 
 Each plugin lives under `plugins/<plugin-name>/` and contains:
-- `.claude-plugin/plugin.json` — plugin metadata (including optional `hooks` for PostToolUse, SessionStart, etc.)
+- `.claude-plugin/plugin.json` — plugin metadata (including optional `hooks` for PreToolUse, PostToolUse, SessionStart, etc.)
 - `skills/<skill-name>/SKILL.md` — one skill per subdirectory; the frontmatter `name` and `description` fields control how Claude triggers the skill
 
 Some plugins are hooks-only (no skills directory) — e.g. `linters`, `windows-notify`.

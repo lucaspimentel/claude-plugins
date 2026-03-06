@@ -4,13 +4,13 @@ Personal [Claude Code](https://claude.ai/code) plugin marketplace by Lucas Pimen
 
 ## Plugins
 
-| Plugin | Description |
-|---|---|
-| [lucas-dev-tools](plugins/lucas-dev-tools/README.md) | Developer workflow utilities for day-to-day use |
-| [chezmoi](plugins/chezmoi/README.md) | Chezmoi dotfile management and diff resolution |
-| [windows-notify](plugins/windows-notify/README.md) | Windows toast notifications *(Windows / WSL only)* |
-| [linters](plugins/linters/README.md) | Auto-lint edited files via PostToolUse hooks |
-| [windows-terminal](plugins/windows-terminal/README.md) | Windows Terminal pane and tab management *(Windows / WSL only)* |
+| Plugin | Version | Description |
+|---|---|---|
+| [lucas-dev-tools](plugins/lucas-dev-tools/README.md) | 1.3.0 | Developer workflow utilities for day-to-day use |
+| [chezmoi](plugins/chezmoi/README.md) | 1.0.4 | Chezmoi dotfile management and diff resolution |
+| [windows-notify](plugins/windows-notify/README.md) | 1.2.5 | Windows toast notifications *(Windows / WSL only)* |
+| [linters](plugins/linters/README.md) | 1.0.2 | Auto-lint edited files via PostToolUse hooks |
+| [windows-terminal](plugins/windows-terminal/README.md) | 1.1.1 | Windows Terminal pane and tab management *(Windows / WSL only)* |
 
 ## Installation
 
