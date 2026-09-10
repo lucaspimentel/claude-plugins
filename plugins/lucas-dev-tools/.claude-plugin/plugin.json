@@ -1,6 +1,6 @@
 {
   "name": "lucas-dev-tools",
-  "version": "1.25.0",
+  "version": "1.26.0",
   "description": "Developer workflow utilities: git commits, PR reviews, PR comments, docs updates, clipboard helpers",
   "author": {
     "name": "Lucas Pimentel"

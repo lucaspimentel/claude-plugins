@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.26.0] - 2026-09-10
+
+### Changed
+- Update address-pr-comments to assess each review comment before asking for a disposition, add a "No code change" outcome, and decouple pushing from replying to no-code-change threads
+
 ## [1.25.0] - 2026-08-26
 
 ### Removed
