@@ -9,7 +9,7 @@ Personal [Claude Code](https://claude.ai/code) plugin marketplace by Lucas Pimen
 | [atlassian-cli](plugins/atlassian-cli/README.md) | 1.0.0 | Atlassian CLI (`acli`) usage for Jira and Confluence |
 | [chezmoi](plugins/chezmoi/README.md) | 1.0.5 | Chezmoi dotfile management and diff resolution |
 | [linters](plugins/linters/README.md) | 1.2.0 | Auto-lint edited files via PostToolUse hooks |
-| [lucas-dev-tools](plugins/lucas-dev-tools/README.md) | 1.26.0 | Developer workflow utilities for day-to-day use |
+| [lucas-dev-tools](plugins/lucas-dev-tools/README.md) | 1.27.0 | Developer workflow hooks (Bash command rules) |
 | [windows-notify](plugins/windows-notify/README.md) | 1.4.0 | Windows toast notifications *(Windows / WSL only)* |
 | [windows-terminal](plugins/windows-terminal/README.md) | 1.1.1 | Windows Terminal pane and tab management *(Windows / WSL only)* |
 

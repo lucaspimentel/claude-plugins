@@ -1,22 +1,8 @@
-# lucas-dev-tools v1.26.0
+# lucas-dev-tools v1.27.0
 
-Developer workflow utilities for day-to-day use inside Claude Code.
+Developer workflow hooks for day-to-day use inside Claude Code. The workflow skills (commit, PR, changelog, release, TODO) now live in the agent-skills repository.
 
 See [installation instructions](../../README.md#installation).
-
-## Skills
-
-| Skill | Description |
-|---|---|
-| `git-commit` | Stage and commit changes with an auto-generated message |
-| `address-pr-comments` | Walk through PR review comments one at a time and address them |
-| `update-docs` | Update project documentation based on recent changes |
-| `update-pr-description` | Update the PR title and description to reflect the current changes |
-| `ship` | Run release actions: version, changelog, docs, commit, tag, push, watch, release |
-| `update-github-actions` | Update and pin GitHub Actions in workflow files to commit SHAs |
-| `update-changelog` | Manage CHANGELOG.md files and GitHub releases |
-| `whats-next` | Show a sorted list of incomplete tasks from TODO.md |
-| `add-todo` | Add new tasks to TODO.md with research context |
 
 ## Hooks
 

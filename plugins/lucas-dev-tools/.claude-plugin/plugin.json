@@ -1,7 +1,7 @@
 {
   "name": "lucas-dev-tools",
-  "version": "1.26.0",
-  "description": "Developer workflow utilities: git commits, PR reviews, PR comments, docs updates, clipboard helpers",
+  "version": "1.27.0",
+  "description": "Developer workflow hooks: Bash command validation rules and a 1Password commit-retry reminder",
   "author": {
     "name": "Lucas Pimentel"
   },
