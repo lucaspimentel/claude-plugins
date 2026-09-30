@@ -6,7 +6,6 @@ Personal [Claude Code](https://claude.ai/code) plugin marketplace by Lucas Pimen
 
 | Plugin | Version | Description |
 |---|---|---|
-| [atlassian-cli](plugins/atlassian-cli/README.md) | 1.0.0 | Atlassian CLI (`acli`) usage for Jira and Confluence |
 | [linters](plugins/linters/README.md) | 1.2.0 | Auto-lint edited files via PostToolUse hooks |
 | [lucas-dev-tools](plugins/lucas-dev-tools/README.md) | 1.27.0 | Developer workflow hooks (Bash command rules) |
 | [windows-notify](plugins/windows-notify/README.md) | 1.4.0 | Windows toast notifications *(Windows / WSL only)* |
@@ -24,7 +23,6 @@ Personal [Claude Code](https://claude.ai/code) plugin marketplace by Lucas Pimen
 2. Install a plugin:
    ```sh
    claude plugin install lucas-dev-tools@lucasp-claude-plugins
-   claude plugin install atlassian-cli@lucasp-claude-plugins
    claude plugin install windows-notify@lucasp-claude-plugins
    claude plugin install linters@lucasp-claude-plugins
    claude plugin install windows-terminal@lucasp-claude-plugins
@@ -40,7 +38,6 @@ Personal [Claude Code](https://claude.ai/code) plugin marketplace by Lucas Pimen
 2. Install a plugin:
    ```
    /plugin install lucas-dev-tools@lucasp-claude-plugins
-   /plugin install atlassian-cli@lucasp-claude-plugins
    /plugin install windows-notify@lucasp-claude-plugins
    /plugin install linters@lucasp-claude-plugins
    /plugin install windows-terminal@lucasp-claude-plugins
