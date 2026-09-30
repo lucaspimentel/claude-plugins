@@ -3,7 +3,7 @@
 ## [1.27.0] - 2026-09-30
 
 ### Removed
-- Remove the add-todo, address-pr-comments, git-commit, ship, update-changelog, update-docs, update-github-actions, update-pr-description, and whats-next skills, which moved to the agent-skills repository
+- Remove the add-todo, address-pr-comments, git-commit, ship, update-changelog, update-docs, update-github-actions, update-pr-description, and whats-next skills, which moved to the [agent-skills](https://github.com/lucaspimentel/agent-skills) repository
 
 ## [1.26.0] - 2026-09-10
 

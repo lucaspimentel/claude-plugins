@@ -1,6 +1,6 @@
 # lucas-dev-tools v1.27.0
 
-Developer workflow hooks for day-to-day use inside Claude Code. The workflow skills (commit, PR, changelog, release, TODO) now live in the agent-skills repository.
+Developer workflow hooks for day-to-day use inside Claude Code. The workflow skills (commit, PR, changelog, release, TODO) now live in the [agent-skills](https://github.com/lucaspimentel/agent-skills) repository.
 
 See [installation instructions](../../README.md#installation).
 
