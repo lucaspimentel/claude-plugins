@@ -9,12 +9,6 @@
   },
   "plugins": [
     {
-      "name": "atlassian-cli",
-      "source": "./plugins/atlassian-cli",
-      "description": "Atlassian CLI (acli) usage for Jira and Confluence: authentication, JQL searches, bulk operations, sprint reports",
-      "version": "1.0.0"
-    },
-    {
       "name": "lucas-dev-tools",
       "source": "./plugins/lucas-dev-tools",
       "description": "Developer workflow hooks: Bash command validation rules and a 1Password commit-retry reminder",
@@ -25,12 +19,6 @@
       "source": "./plugins/windows-notify",
       "description": "Windows/WSL only. Shows Windows toast notifications when Claude Code needs attention",
       "version": "1.4.0"
-    },
-    {
-      "name": "chezmoi",
-      "source": "./plugins/chezmoi",
-      "description": "Chezmoi dotfile management: diff resolution, file sync between source and destination",
-      "version": "1.0.5"
     },
     {
       "name": "windows-terminal",
